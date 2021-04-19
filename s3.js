@@ -17,22 +17,27 @@ const s3 = new S3({
 
 // upload file to s3 bucket
 const uploadFile = (file) => {
+    // create a readable stream for the file
     const fileStream = fs.createReadStream(file.path);
 
+    // params for the file to be uploaded
     const uploadParams = {
         Bucket: bucketName,
         Body: fileStream,
         Key: file.filename,
     };
 
+    // upload file to s3 bucket
     return s3.upload(uploadParams).promise();
 };
 exports.uploadFile = uploadFile;
 
 // modify file extension on s3 bucket
 const modifyExtension = (data) => {
+    // replace file extension with new one chosen by the user on the client
     const fileNameWithNewExt = replaceExt(data.name, data.data);
 
+    // copy the file with new extension within the same bucket then delete old file
     return s3
         .copyObject({
             Bucket: bucketName,
