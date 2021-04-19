@@ -1,6 +1,6 @@
 SERVER FOR TECH TEST
 
-git clone ...
+git clone https://github.com/davidmihalovits/shapr-techtest-backend.git
 
 npm install
 
